@@ -96,3 +96,27 @@ CREATE TABLE Enrolments (
     CONSTRAINT UQ_Enrolments_RegistrationNumber UNIQUE (RegistrationNumber),
     CONSTRAINT UQ_Enrolments_ParticipantEvent UNIQUE (ParticipantId, EventId)
 ); 
+
+--RESULTS table that will store race results captured by Organisers
+CREATE TABLE Results (
+    ResultId INT IDENTITY(1,1) PRIMARY KEY,
+    EnrolmentId INT NOT NULL,
+    ParticipantId INT NOT NULL,
+    EventId INT NOT NULL,
+    CategoryId INT NOT NULL,
+    GunTime TIME,
+    ChipTime TIME,
+    OverallPosition INT,
+    CategoryPosition INT,
+    Pace FLOAT,
+    Status NVARCHAR(50) DEFAULT 'Completed',
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    UpdatedAt DATETIME DEFAULT GETDATE(),
+    
+    CONSTRAINT FK_Results_EnrolmentId FOREIGN KEY (EnrolmentId) REFERENCES Enrolments(EnrolmentId),
+    CONSTRAINT FK_Results_ParticipantId FOREIGN KEY (ParticipantId) REFERENCES Users(UserId),
+    CONSTRAINT FK_Results_EventId FOREIGN KEY (EventId) REFERENCES Events(EventId),
+    CONSTRAINT FK_Results_CategoryId FOREIGN KEY (CategoryId) REFERENCES Categories(CategoryId),
+    CONSTRAINT CK_Results_Status CHECK (Status IN ('DNS', 'DNF', 'Completed')),
+    CONSTRAINT UQ_Results_Enrolment UNIQUE (EnrolmentId)
+);
