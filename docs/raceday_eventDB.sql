@@ -158,4 +158,54 @@ VALUES
     ('10km Charity Walk', 'Walking', '10 km', 'All Ages', 'Mixed', 120.00),
     ('20km Cycle Tour', 'Cycling', '20 km', '16+', 'Mixed', 200.00),
     ('40km Cycle Challenge', 'Cycling', '40 km', '18+', 'Mixed', 300.00),
-    ('100km Cycle Challenge', 'Cycling', '100 km', '18+', 'Mixed', 450.00);
+    ('100km Cycle Challenge', 'Cycling', '100 km', '18+', 'Mixed', 450.00); 
+
+--Insert Events
+INSERT INTO Events (
+    EventName, Description, OrganiserId, Location, Venue, 
+    EventDate, RegistrationDeadline, EntryFee, MaxParticipants, 
+    EventType, Distance, Status
+)
+VALUES 
+    (
+        'Soweto Marathon 2026',
+        'The iconic Soweto Marathon through the streets of Soweto, celebrating the rich heritage of South African road running.',
+        1,
+        'Soweto, Johannesburg',
+        'FNB Stadium',
+        '2026-11-07 06:00:00',
+        '2026-10-31 23:59:59',
+        300.00,
+        15000,
+        'Running',
+        '42.2 km',
+        'Open'
+    ),
+    (
+        'Cape Town Cycle Tour 2026',
+        'The largest timed cycling event in the world, riding around the Cape Peninsula with spectacular ocean views.',
+        2,
+        'Cape Town',
+        'Grand Parade, Cape Town CBD',
+        '2026-03-08 07:00:00',
+        '2026-02-28 23:59:59',
+        500.00,
+        35000,
+        'Cycling',
+        '109 km',
+        'Open'
+    ),
+    (
+        'Two Oceans Marathon 2026',
+        'The "Ultra Marathon" featuring stunning coastal scenery between Cape Town and Hout Bay.',
+        1,
+        'Cape Town',
+        'Newlands Stadium',
+        '2026-04-04 05:30:00',
+        '2026-03-25 23:59:59',
+        400.00,
+        12000,
+        'Running',
+        '56 km',
+        'Open'
+    );
