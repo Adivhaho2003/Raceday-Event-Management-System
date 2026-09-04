@@ -74,3 +74,25 @@ CREATE TABLE EventCategories (
     CONSTRAINT UQ_EventCategories_EventCategory UNIQUE (EventId, CategoryId),
     CONSTRAINT CK_EventCategories_Capacity CHECK (Capacity > 0)
 ); 
+
+--ENROLMENTS table for Participant registrations for events
+CREATE TABLE Enrolments (
+    EnrolmentId INT IDENTITY(1,1) PRIMARY KEY,
+    EventId INT NOT NULL,
+    ParticipantId INT NOT NULL,
+    EventCategoryId INT NOT NULL,
+    Status NVARCHAR(50) DEFAULT 'Registered',
+    RegistrationNumber NVARCHAR(50) NOT NULL,
+    RegistrationDate DATETIME DEFAULT GETDATE(),
+    UpdatedAt DATETIME DEFAULT GETDATE(),
+    ConfirmationDate DATETIME,
+    PaymentStatus NVARCHAR(50) DEFAULT 'Pending',
+    
+    CONSTRAINT FK_Enrolments_EventId FOREIGN KEY (EventId) REFERENCES Events(EventId),
+    CONSTRAINT FK_Enrolments_ParticipantId FOREIGN KEY (ParticipantId) REFERENCES Users(UserId),
+    CONSTRAINT FK_Enrolments_EventCategoryId FOREIGN KEY (EventCategoryId) REFERENCES EventCategories(EventCategoryId),
+    CONSTRAINT CK_Enrolments_Status CHECK (Status IN ('Registered', 'Confirmed', 'DNS', 'DNF', 'Completed')),
+    CONSTRAINT CK_Enrolments_PaymentStatus CHECK (PaymentStatus IN ('Pending', 'Paid', 'Refunded')),
+    CONSTRAINT UQ_Enrolments_RegistrationNumber UNIQUE (RegistrationNumber),
+    CONSTRAINT UQ_Enrolments_ParticipantEvent UNIQUE (ParticipantId, EventId)
+); 
