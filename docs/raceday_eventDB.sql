@@ -208,4 +208,53 @@ VALUES
         'Running',
         '56 km',
         'Open'
-    );
+    ); 
+
+--Link Events to Categories (EventCategories)
+INSERT INTO EventCategories (EventId, CategoryId, Fee, Capacity)
+SELECT 
+    (SELECT EventId FROM Events WHERE EventName = 'Soweto Marathon 2026'),
+    CategoryId,
+    StandardFee,
+    CASE 
+        WHEN CategoryName = 'Marathon' THEN 5000
+        WHEN CategoryName = 'Half Marathon' THEN 4000
+        WHEN CategoryName = '10km Road Race' THEN 3000
+        WHEN CategoryName = '5km Fun Run' THEN 3000
+        ELSE 2000
+    END
+FROM Categories
+WHERE CategoryName IN ('Marathon', 'Half Marathon', '10km Road Race', '5km Fun Run');
+
+INSERT INTO EventCategories (EventId, CategoryId, Fee, Capacity)
+SELECT 
+    (SELECT EventId FROM Events WHERE EventName = 'Cape Town Cycle Tour 2026'),
+    CategoryId,
+    StandardFee,
+    CASE 
+        WHEN CategoryName = '100km Cycle Challenge' THEN 20000
+        WHEN CategoryName = '40km Cycle Challenge' THEN 10000
+        WHEN CategoryName = '20km Cycle Tour' THEN 5000
+        ELSE 2000
+    END
+FROM Categories
+WHERE CategoryName IN ('100km Cycle Challenge', '40km Cycle Challenge', '20km Cycle Tour');
+
+INSERT INTO EventCategories (EventId, CategoryId, Fee, Capacity)
+SELECT 
+    (SELECT EventId FROM Events WHERE EventName = 'Two Oceans Marathon 2026'),
+    CategoryId,
+    CASE 
+        WHEN CategoryName = 'Ultra Marathon' THEN 480.00
+        WHEN CategoryName = 'Marathon' THEN 400.00
+        ELSE StandardFee
+    END,
+    CASE 
+        WHEN CategoryName = 'Ultra Marathon' THEN 5000
+        WHEN CategoryName = 'Marathon' THEN 4000
+        WHEN CategoryName = 'Half Marathon' THEN 2000
+        WHEN CategoryName = '10km Road Race' THEN 1000
+        ELSE 500
+    END
+FROM Categories
+WHERE CategoryName IN ('Ultra Marathon', 'Marathon', 'Half Marathon', '10km Road Race');
