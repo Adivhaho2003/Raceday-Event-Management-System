@@ -196,7 +196,7 @@ ERD design decisions and explanations
 API endpoint plan walkthrough
 SQL script execution in SSMS
 Database verification queries
-Link to YouTube Video:
+Link to YouTube Video: https://youtu.be/SqR719-4qcc
 
 🔄 CI/CD Pipeline
 A GitHub Actions workflow will be configured to:
