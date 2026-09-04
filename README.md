@@ -198,12 +198,14 @@ SQL script execution in SSMS
 Database verification queries
 Link to YouTube Video:
 
-🔄 CI/CD Pipeline (Part 2 & 3)
+🔄 CI/CD Pipeline
 A GitHub Actions workflow will be configured to:
 Build the API and MVC projects
 Run all unit tests
 Report build status with a green badge
 Automate deployment workflows
+<img width="655" height="288" alt="image" src="https://github.com/user-attachments/assets/90cf1b19-9c61-4a01-9a02-f2990fafae89" />
+
 
 🛠️ Technologies Used
 Technology	Purpose
