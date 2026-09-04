@@ -58,3 +58,19 @@ CREATE TABLE Categories (
     CONSTRAINT CK_Categories_Type CHECK (CategoryType IN ('Running', 'Walking', 'Cycling')),
     CONSTRAINT CK_Categories_Gender CHECK (Gender IN ('Male', 'Female', 'Mixed', NULL))
 ); 
+
+--EVENTCATEGORIES TABLE that Links Events to Categories with event-specific fees and capacities
+CREATE TABLE EventCategories (
+    EventCategoryId INT IDENTITY(1,1) PRIMARY KEY,
+    EventId INT NOT NULL,
+    CategoryId INT NOT NULL,
+    Fee DECIMAL(10,2),
+    Capacity INT,
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    UpdatedAt DATETIME DEFAULT GETDATE(),
+    
+    CONSTRAINT FK_EventCategories_EventId FOREIGN KEY (EventId) REFERENCES Events(EventId),
+    CONSTRAINT FK_EventCategories_CategoryId FOREIGN KEY (CategoryId) REFERENCES Categories(CategoryId),
+    CONSTRAINT UQ_EventCategories_EventCategory UNIQUE (EventId, CategoryId),
+    CONSTRAINT CK_EventCategories_Capacity CHECK (Capacity > 0)
+); 
