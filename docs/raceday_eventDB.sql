@@ -1,0 +1,22 @@
+--Creating a database
+CREATE DATABASE raceday_eventDB;
+
+--Use the database
+use [raceday_eventDB];
+
+--USERS table to stores all system users
+CREATE TABLE Users (
+    UserId INT IDENTITY(1,1) PRIMARY KEY,
+    Email NVARCHAR(255) NOT NULL UNIQUE,
+    PasswordHash NVARCHAR(255) NOT NULL,
+    FirstName NVARCHAR(100) NOT NULL,
+    LastName NVARCHAR(100) NOT NULL,
+    Phone NVARCHAR(20),
+    DateOfBirth DATE,
+    Role NVARCHAR(50) NOT NULL DEFAULT 'Participant',
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    UpdatedAt DATETIME DEFAULT GETDATE(),
+    
+    CONSTRAINT CK_Users_Role CHECK (Role IN ('Participant', 'Organiser', 'Admin'))
+);
+
