@@ -133,8 +133,6 @@ The API follows RESTful principles with role-based access control.
 - (For Part 2 & 3: .NET 7/8 SDK, Visual Studio 2022+, Docker Desktop)
 
 ### 1. Clone the Repository
-
-```bash
 git clone https://github.com/Adiwhaho2003/Raceday-Event-Management-System.git
 cd Raceday-Event-Management-System
 
