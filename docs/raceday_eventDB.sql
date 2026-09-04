@@ -137,3 +137,25 @@ CREATE TABLE WeatherData (
     
     CONSTRAINT FK_WeatherData_EventId FOREIGN KEY (EventId) REFERENCES Events(EventId)
 );  
+
+--Insert Users (2 Organisers, 2 Participants)
+INSERT INTO Users (Email, PasswordHash, FirstName, LastName, Phone, DateOfBirth, Role)
+VALUES 
+    ('thabo.mokoena@runnershub.co.za', 'hash_org1_secure', 'Thabo', 'Mokoena', '+27821234567', '1985-03-15', 'Organiser'),
+    ('linda.vandermerwe@capetowncycling.co.za', 'hash_org2_secure', 'Linda', 'Van Der Merwe', '+27829876543', '1990-07-22', 'Organiser'),
+    ('sipho.ndlovu@gmail.com', 'hash_user1_secure', 'Sipho', 'Ndlovu', '+27836543210', '1992-11-05', 'Participant'),
+    ('johannes.smit@outlook.com', 'hash_user2_secure', 'Johannes', 'Smit', '+27837654321', '1988-09-18', 'Participant');
+
+--Insert Categories
+INSERT INTO Categories (CategoryName, CategoryType, Distance, AgeGroup, Gender, StandardFee)
+VALUES 
+    ('5km Fun Run', 'Running', '5 km', 'All Ages', 'Mixed', 100.00),
+    ('10km Road Race', 'Running', '10 km', '16+', 'Mixed', 150.00),
+    ('Half Marathon', 'Running', '21.1 km', '18+', 'Mixed', 250.00),
+    ('Marathon', 'Running', '42.2 km', '20+', 'Mixed', 350.00),
+    ('Ultra Marathon', 'Running', '56 km', '20+', 'Mixed', 450.00),
+    ('5km Family Walk', 'Walking', '5 km', 'All Ages', 'Mixed', 80.00),
+    ('10km Charity Walk', 'Walking', '10 km', 'All Ages', 'Mixed', 120.00),
+    ('20km Cycle Tour', 'Cycling', '20 km', '16+', 'Mixed', 200.00),
+    ('40km Cycle Challenge', 'Cycling', '40 km', '18+', 'Mixed', 300.00),
+    ('100km Cycle Challenge', 'Cycling', '100 km', '18+', 'Mixed', 450.00);
