@@ -120,3 +120,20 @@ CREATE TABLE Results (
     CONSTRAINT CK_Results_Status CHECK (Status IN ('DNS', 'DNF', 'Completed')),
     CONSTRAINT UQ_Results_Enrolment UNIQUE (EnrolmentId)
 );
+
+--WEATHERDATA table that will Weather forecasts for events
+CREATE TABLE WeatherData (
+    WeatherId INT IDENTITY(1,1) PRIMARY KEY,
+    EventId INT NOT NULL,
+    ForecastDate DATE NOT NULL,
+    ForecastTime TIME,
+    Temperature FLOAT,
+    Humidity FLOAT,
+    WindSpeed FLOAT,
+    WindDirection NVARCHAR(50),
+    Conditions NVARCHAR(255),
+    Source NVARCHAR(100),
+    RetrievedAt DATETIME DEFAULT GETDATE(),
+    
+    CONSTRAINT FK_WeatherData_EventId FOREIGN KEY (EventId) REFERENCES Events(EventId)
+);  
