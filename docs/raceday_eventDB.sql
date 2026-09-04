@@ -331,4 +331,161 @@ FROM Events e
 JOIN EventCategories ec ON e.EventId = ec.EventId
 JOIN Categories c ON ec.CategoryId = c.CategoryId
 WHERE e.EventName = 'Cape Town Cycle Tour 2026'
-  AND c.CategoryName = '40km Cycle Challenge';
+  AND c.CategoryName = '40km Cycle Challenge'; 
+
+--Insert Results (Sample Race Results)
+DECLARE @Enrolment1Id INT = (SELECT EnrolmentId FROM Enrolments WHERE RegistrationNumber = 'REG-2026-001');
+DECLARE @Enrolment2Id INT = (SELECT EnrolmentId FROM Enrolments WHERE RegistrationNumber = 'REG-2026-002');
+DECLARE @Enrolment3Id INT = (SELECT EnrolmentId FROM Enrolments WHERE RegistrationNumber = 'REG-2026-003');
+DECLARE @Enrolment4Id INT = (SELECT EnrolmentId FROM Enrolments WHERE RegistrationNumber = 'REG-2026-004');
+
+INSERT INTO Results (EnrolmentId, ParticipantId, EventId, CategoryId, GunTime, ChipTime, OverallPosition, CategoryPosition, Pace, Status)
+SELECT 
+    @Enrolment1Id,
+    @Participant1Id,
+    e.EventId,
+    c.CategoryId,
+    '03:45:23',
+    '03:42:15',
+    342,
+    56,
+    5.30,
+    'Completed'
+FROM Events e
+JOIN EventCategories ec ON e.EventId = ec.EventId
+JOIN Categories c ON ec.CategoryId = c.CategoryId
+WHERE e.EventName = 'Soweto Marathon 2026'
+  AND c.CategoryName = 'Marathon';
+
+INSERT INTO Results (EnrolmentId, ParticipantId, EventId, CategoryId, GunTime, ChipTime, OverallPosition, CategoryPosition, Pace, Status)
+SELECT 
+    @Enrolment2Id,
+    @Participant1Id,
+    e.EventId,
+    c.CategoryId,
+    '05:52:47',
+    '05:48:22',
+    189,
+    34,
+    6.22,
+    'Completed'
+FROM Events e
+JOIN EventCategories ec ON e.EventId = ec.EventId
+JOIN Categories c ON ec.CategoryId = c.CategoryId
+WHERE e.EventName = 'Two Oceans Marathon 2026'
+  AND c.CategoryName = 'Ultra Marathon';
+
+INSERT INTO Results (EnrolmentId, ParticipantId, EventId, CategoryId, GunTime, ChipTime, OverallPosition, CategoryPosition, Pace, Status)
+SELECT 
+    @Enrolment3Id,
+    @Participant2Id,
+    e.EventId,
+    c.CategoryId,
+    '01:55:42',
+    '01:52:18',
+    856,
+    124,
+    5.33,
+    'Completed'
+FROM Events e
+JOIN EventCategories ec ON e.EventId = ec.EventId
+JOIN Categories c ON ec.CategoryId = c.CategoryId
+WHERE e.EventName = 'Soweto Marathon 2026'
+  AND c.CategoryName = 'Half Marathon';
+
+INSERT INTO Results (EnrolmentId, ParticipantId, EventId, CategoryId, GunTime, ChipTime, OverallPosition, CategoryPosition, Pace, Status)
+SELECT 
+    @Enrolment4Id,
+    @Participant2Id,
+    e.EventId,
+    c.CategoryId,
+    '03:15:42',
+    '03:12:18',
+    156,
+    28,
+    34.0,
+    'Completed'
+FROM Events e
+JOIN EventCategories ec ON e.EventId = ec.EventId
+JOIN Categories c ON ec.CategoryId = c.CategoryId
+WHERE e.EventName = 'Cape Town Cycle Tour 2026'
+  AND c.CategoryName = '100km Cycle Challenge';
+
+--Insert Weather Data
+INSERT INTO WeatherData (EventId, ForecastDate, ForecastTime, Temperature, Humidity, WindSpeed, WindDirection, Conditions, Source)
+SELECT 
+    EventId,
+    '2026-11-07',
+    '06:00:00',
+    18.5,
+    65.0,
+    12.0,
+    'NE',
+    'Partly cloudy with light winds. Perfect running conditions.',
+    'WeatherSA'
+FROM Events WHERE EventName = 'Soweto Marathon 2026';
+
+INSERT INTO WeatherData (EventId, ForecastDate, ForecastTime, Temperature, Humidity, WindSpeed, WindDirection, Conditions, Source)
+SELECT 
+    EventId,
+    '2026-11-07',
+    '08:00:00',
+    22.0,
+    58.0,
+    15.0,
+    'NE',
+    'Warming up with increasing cloud cover.',
+    'WeatherSA'
+FROM Events WHERE EventName = 'Soweto Marathon 2026';
+
+INSERT INTO WeatherData (EventId, ForecastDate, ForecastTime, Temperature, Humidity, WindSpeed, WindDirection, Conditions, Source)
+SELECT 
+    EventId,
+    '2026-03-08',
+    '07:00:00',
+    18.0,
+    72.0,
+    20.0,
+    'SE',
+    'Light to moderate South Easter. Typical Cape conditions.',
+    'WeatherSA'
+FROM Events WHERE EventName = 'Cape Town Cycle Tour 2026';
+
+INSERT INTO WeatherData (EventId, ForecastDate, ForecastTime, Temperature, Humidity, WindSpeed, WindDirection, Conditions, Source)
+SELECT 
+    EventId,
+    '2026-03-08',
+    '10:00:00',
+    22.5,
+    65.0,
+    25.0,
+    'SE',
+    'South Easter strengthening. Expect wind assistance along coast.',
+    'WeatherSA'
+FROM Events WHERE EventName = 'Cape Town Cycle Tour 2026';
+
+INSERT INTO WeatherData (EventId, ForecastDate, ForecastTime, Temperature, Humidity, WindSpeed, WindDirection, Conditions, Source)
+SELECT 
+    EventId,
+    '2026-04-04',
+    '05:30:00',
+    15.0,
+    80.0,
+    10.0,
+    'NW',
+    'Misty early morning along the coast. Clearing later.',
+    'WeatherSA'
+FROM Events WHERE EventName = 'Two Oceans Marathon 2026';
+
+INSERT INTO WeatherData (EventId, ForecastDate, ForecastTime, Temperature, Humidity, WindSpeed, WindDirection, Conditions, Source)
+SELECT 
+    EventId,
+    '2026-04-04',
+    '08:00:00',
+    19.5,
+    70.0,
+    15.0,
+    'NW',
+    'Partly cloudy with pleasant temperatures.',
+    'WeatherSA'
+FROM Events WHERE EventName = 'Two Oceans Marathon 2026';
