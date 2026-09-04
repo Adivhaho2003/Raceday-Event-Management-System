@@ -258,3 +258,77 @@ SELECT
     END
 FROM Categories
 WHERE CategoryName IN ('Ultra Marathon', 'Marathon', 'Half Marathon', '10km Road Race');
+
+--Insert Enrolments (Sample Participant Registrations)
+DECLARE @Participant1Id INT = (SELECT UserId FROM Users WHERE Email = 'sipho.ndlovu@gmail.com');
+DECLARE @Participant2Id INT = (SELECT UserId FROM Users WHERE Email = 'johannes.smit@outlook.com');
+
+INSERT INTO Enrolments (EventId, ParticipantId, EventCategoryId, Status, RegistrationNumber, PaymentStatus)
+SELECT 
+    e.EventId,
+    @Participant1Id,
+    ec.EventCategoryId,
+    'Confirmed',
+    'REG-2026-001',
+    'Paid'
+FROM Events e
+JOIN EventCategories ec ON e.EventId = ec.EventId
+JOIN Categories c ON ec.CategoryId = c.CategoryId
+WHERE e.EventName = 'Soweto Marathon 2026'
+  AND c.CategoryName = 'Marathon';
+
+INSERT INTO Enrolments (EventId, ParticipantId, EventCategoryId, Status, RegistrationNumber, PaymentStatus)
+SELECT 
+    e.EventId,
+    @Participant1Id,
+    ec.EventCategoryId,
+    'Confirmed',
+    'REG-2026-002',
+    'Paid'
+FROM Events e
+JOIN EventCategories ec ON e.EventId = ec.EventId
+JOIN Categories c ON ec.CategoryId = c.CategoryId
+WHERE e.EventName = 'Two Oceans Marathon 2026'
+  AND c.CategoryName = 'Ultra Marathon';
+
+INSERT INTO Enrolments (EventId, ParticipantId, EventCategoryId, Status, RegistrationNumber, PaymentStatus)
+SELECT 
+    e.EventId,
+    @Participant2Id,
+    ec.EventCategoryId,
+    'Confirmed',
+    'REG-2026-003',
+    'Paid'
+FROM Events e
+JOIN EventCategories ec ON e.EventId = ec.EventId
+JOIN Categories c ON ec.CategoryId = c.CategoryId
+WHERE e.EventName = 'Soweto Marathon 2026'
+  AND c.CategoryName = 'Half Marathon';
+
+INSERT INTO Enrolments (EventId, ParticipantId, EventCategoryId, Status, RegistrationNumber, PaymentStatus)
+SELECT 
+    e.EventId,
+    @Participant2Id,
+    ec.EventCategoryId,
+    'Confirmed',
+    'REG-2026-004',
+    'Paid'
+FROM Events e
+JOIN EventCategories ec ON e.EventId = ec.EventId
+JOIN Categories c ON ec.CategoryId = c.CategoryId
+WHERE e.EventName = 'Cape Town Cycle Tour 2026'
+  AND c.CategoryName = '100km Cycle Challenge';
+
+INSERT INTO Enrolments (EventId, ParticipantId, EventCategoryId, Status, RegistrationNumber, PaymentStatus)
+SELECT 
+    e.EventId,
+    @Participant1Id,
+    ec.EventCategoryId,
+    'Registered',
+    'REG-2026-005',
+    'Pending'
+FROM Events e
+JOIN EventCategories ec ON e.EventId = ec.EventId
+JOIN Categories c ON ec.CategoryId = c.CategoryId
+WHERE e.EventName = 'Cape Town Cycle Tour 2026'
+  AND c.CategoryName = '40km Cycle Challenge';
