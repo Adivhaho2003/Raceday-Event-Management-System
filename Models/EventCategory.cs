@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RaceDayAPI.Models
+namespace RaceDay_Management_System
 {
     public class EventCategory
     {

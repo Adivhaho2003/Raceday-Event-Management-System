@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RaceDayAPI.Models
+namespace RaceDay_Management_System
 {
     public class Enrolment
     {
@@ -16,7 +16,7 @@ namespace RaceDayAPI.Models
         public int EventCategoryId { get; set; }
 
         [StringLength(50)]
-        public string Status { get; set; } = "Registered"; // Registered, Confirmed, DNS, DNF, Completed
+        public string Status { get; set; } = "Registered";
 
         [Required]
         [StringLength(50)]
@@ -29,7 +29,7 @@ namespace RaceDayAPI.Models
         public DateTime? ConfirmationDate { get; set; }
 
         [StringLength(50)]
-        public string PaymentStatus { get; set; } = "Pending"; // Pending, Paid, Refunded
+        public string PaymentStatus { get; set; } = "Pending";
 
         // Navigation properties
         public Event? Event { get; set; }

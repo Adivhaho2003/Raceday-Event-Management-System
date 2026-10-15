@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RaceDayAPI.Models
+namespace RaceDay_Management_System
 {
     public class Result
     {
@@ -29,7 +29,7 @@ namespace RaceDayAPI.Models
         public double? Pace { get; set; }
 
         [StringLength(50)]
-        public string Status { get; set; } = "Completed"; // DNS, DNF, Completed
+        public string Status { get; set; } = "Completed";
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 

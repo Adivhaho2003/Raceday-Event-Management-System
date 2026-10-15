@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RaceDayAPI.Models
+namespace RaceDay_Management_System
 {
     public class Event
     {
@@ -33,20 +33,19 @@ namespace RaceDayAPI.Models
 
         [Required]
         [StringLength(50)]
-        public string EventType { get; set; } = string.Empty; // Running, Walking, Cycling
+        public string EventType { get; set; } = string.Empty;
 
         [StringLength(50)]
         public string? Distance { get; set; }
 
         [StringLength(50)]
-        public string Status { get; set; } = "Pending"; // Pending, Open, Closed, Cancelled, Completed
+        public string Status { get; set; } = "Pending";
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
-        // Navigation properties (not mapped to database directly)
+        // Navigation property
         public User? Organiser { get; set; }
-        public List<EventCategory>? EventCategories { get; set; }
     }
 }

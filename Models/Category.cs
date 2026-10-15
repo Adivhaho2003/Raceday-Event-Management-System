@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RaceDayAPI.Models
+namespace RaceDay_Management_System
 {
     public class Category
     {
@@ -12,7 +12,7 @@ namespace RaceDayAPI.Models
 
         [Required]
         [StringLength(50)]
-        public string CategoryType { get; set; } = string.Empty; // Running, Walking, Cycling
+        public string CategoryType { get; set; } = string.Empty;
 
         [StringLength(50)]
         public string? Distance { get; set; }
@@ -21,7 +21,7 @@ namespace RaceDayAPI.Models
         public string? AgeGroup { get; set; }
 
         [StringLength(20)]
-        public string? Gender { get; set; } // Male, Female, Mixed
+        public string? Gender { get; set; }
 
         public decimal StandardFee { get; set; } = 0.00m;
 
