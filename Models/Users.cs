@@ -31,6 +31,9 @@ namespace RaceDay_Management_System
         [StringLength(50)]
         public string Role { get; set; } = "Participant";
 
+        [StringLength(500)]
+        public string? ProfilePictureUrl { get; set; }
+
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
