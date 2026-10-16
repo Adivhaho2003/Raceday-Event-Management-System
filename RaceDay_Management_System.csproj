@@ -1,16 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);1591</NoWarn>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591;CS8981</NoWarn>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.9.1" />
+	</ItemGroup>
+
+	<!-- Exclude the test project folder from this project's compilation -->
+	<ItemGroup>
+		<Compile Remove="RaceDay_Management_System.Tests\**" />
+		<Content Remove="RaceDay_Management_System.Tests\**" />
+		<None Remove="RaceDay_Management_System.Tests\**" />
+		<EmbeddedResource Remove="RaceDay_Management_System.Tests\**" />
+	</ItemGroup>
 
 </Project>
