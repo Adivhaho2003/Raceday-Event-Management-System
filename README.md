@@ -245,7 +245,7 @@ View the latest workflow runs: [GitHub Actions](https://github.com/Adiwhaho2003/
 
 ## 🎥 Video Presentation
 
-[**Link:** ](https://youtu.be/lYpDC1AGnEI)
+[**Link:** ](https://youtu.be/lYpDC1AGnEI)https://youtu.be/lYpDC1AGnEI
 
 ---
 **The video covers:**
