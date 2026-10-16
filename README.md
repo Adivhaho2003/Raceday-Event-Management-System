@@ -245,30 +245,18 @@ View the latest workflow runs: [GitHub Actions](https://github.com/Adiwhaho2003/
 
 ## 🎥 Video Presentation
 
-> **📹 Video Coming Soon** — The full walkthrough of the RaceDay API will be available here.
-
-**The video will cover:**
-
-- ⏱️ **0:00** — Introduction and project overview
-- ⏱️ **1:00** — Code structure (Controllers, Databases, Models, Enums)
-- ⏱️ **3:00** — Swagger walkthrough (all endpoint groups)
-- ⏱️ **6:00** — Authentication flow and role enforcement demo
-- ⏱️ **9:00** — Unit tests in Test Explorer (21 passing)
-- ⏱️ **12:00** — CI/CD green build demonstration
-- ⏱️ **13:00** — Summary and closing
-
-**Link:** [YouTube Video]([TO BE ADDED])
+[**Link:** ](https://youtu.be/lYpDC1AGnEI)
 
 ---
 **The video covers:**
 
-- ⏱️ **0:00** — Introduction and project overview
-- ⏱️ **1:00** — Code structure (Controllers, Databases, Models, Enums)
+- ⏱️ **1:00** — Introduction and project overview
+- ⏱️ **2:00** — Code structure (Controllers, Databases, Models, Enums)
 - ⏱️ **3:00** — Swagger walkthrough (all endpoint groups)
-- ⏱️ **6:00** — Authentication flow and role enforcement demo
-- ⏱️ **9:00** — Unit tests in Test Explorer (21 passing)
-- ⏱️ **12:00** — CI/CD green build demonstration
-- ⏱️ **13:00** — Summary and closing
+- ⏱️ **3:30** — Authentication flow and role enforcement demo
+- ⏱️ **4:00** — Unit tests in Test Explorer (21 passing)
+- ⏱️ **5:00** — CI/CD green build demonstration
+- ⏱️ **5:30** — Summary and closing
 
 ---
 
