@@ -1,10 +1,4 @@
 # 🏃 RaceDay Event Management System
-
-![Build Status](https://github.com/Adivhaho2003/Raceday-Event-Management-System/actions/runs/38888558925/job/116932195549)
-![.NET](https://img.shields.io/badge/.NET-8.0-purple)
-![SQL Server](https://img.shields.io/badge/SQL%20Server-2022-red)
-![Unit Tests]`docs\unit_test.png`
-
 ---
 
 ## 📋 Project Overview
