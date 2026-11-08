@@ -1,0 +1,94 @@
+﻿@model List<Raceday_Event_Management_System.MVC.Models.EventViewModel>
+@{
+    ViewData["Title"] = "Manage Events";
+}
+
+<div class="container mt-4">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold mb-0">My Events</h2>
+        <a asp-action="CreateEvent" class="btn btn-danger fw-bold"><i class="bi bi-plus-circle"></i> Create New Event</a>
+    </div>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="alert alert-info">No active events found.</div>
+    }
+    else
+    {
+        <div class="table-responsive shadow-sm rounded">
+            <table class="table table-hover bg-white mb-0 align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Event Name</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ev in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold">
+                                <!-- Event Thumbnail -->
+                                @if (!string.IsNullOrEmpty(ev.BannerImageUrl))
+                                {
+                                    <img src="@ev.BannerImageUrl" alt="Banner" style="width: 45px; height: 45px; object-fit: cover; border-radius: 8px; margin-right: 10px;" />
+                                }
+                                else
+                                {
+                                    <img src="/images/events/@(ev.EventName.Replace(" ", "").Replace("'", "")).jpg"
+                                         alt="Banner"
+                                         style="width: 45px; height: 45px; object-fit: cover; border-radius: 8px; margin-right: 10px;"
+                                         onerror="this.style.display='none'">
+                                }
+                                @ev.EventName
+                            </td>
+                            <td>@ev.EventDate.ToString("dd MMM yyyy")</td>
+                            <td><span class="badge bg-secondary">@ev.EventType</span></td>
+                            <td>
+                                @if (ev.Status == "Open")
+                                {
+                                    <span class="badge bg-success">@ev.Status</span>
+                                }
+                                else if (ev.Status == "Cancelled")
+                                {
+                                    <span class="badge bg-danger">@ev.Status</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark">@ev.Status</span>
+                                }
+                            </td>
+                            <td class="text-end">
+                                <a asp-action="ManageCategories" asp-route-id="@ev.EventId" class="btn btn-sm btn-outline-primary" title="Manage Categories"><i class="bi bi-tags"></i></a>
+                                <a asp-action="Enrolments" asp-route-id="@ev.EventId" class="btn btn-sm btn-outline-info" title="View Enrolments & Capture Results"><i class="bi bi-people"></i></a>
+
+                                <!-- CANCEL BUTTON -->
+                                <form asp-action="CancelEvent" asp-route-id="@ev.EventId" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to cancel this event? Participants will no longer be able to enter.');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Cancel Event"><i class="bi bi-x-circle"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
