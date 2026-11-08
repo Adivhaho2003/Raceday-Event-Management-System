@@ -1,3 +1,18 @@
+:root {
+    /* Brand Colors */
+    --ct-petrol: #254b51; /* Dusky Petrol - Deep sophisticated base */
+    --ct-petrol-light: #345f66; /* Lighter petrol for hover states */
+    --ct-aqua: #00b4d8; /* Lucid Aquamarine - Vibrant energetic accent */
+    --ct-aqua-hover: #0096c7;
+    --ct-gold: #d4af37; /* Gold Metallic - Premium accent */
+    /* Neutrals */
+    --ct-bg: #f4f7f6; /* Very light aqua-tinted grey for backgrounds */
+    --ct-card-bg: #ffffff;
+    --ct-text: #1d2d30;
+    --ct-text-muted: #6c757d;
+}
+
+/* --- Base Typography & Layout --- */
 html {
     font-size: 14px;
     position: relative;
@@ -11,117 +26,209 @@ html {
 }
 
 body {
-    margin-bottom: 60px; /* Space for the fixed footer */
-    background-color: #f8f9fa; /* Light grey background for the whole app */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--ct-bg);
+    font-family: 'Inter', sans-serif;
+    color: var(--ct-text);
+    -webkit-font-smoothing: antialiased;
+    /* Flexbox setup to prevent footer overlap */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
 }
 
-/* --- Accessibility Focus Ring --- */
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #E63946; /* Changed from blue to Race Red */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--ct-petrol);
 }
 
-/* --- Fixed Footer --- */
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    line-height: 60px;
-    background-color: #ffffff;
-    border-top: 1px solid #dee2e6;
+/* --- Navbar --- */
+.navbar-raceday {
+    background-color: var(--ct-petrol) !important;
+    box-shadow: 0 4px 20px rgba(37, 75, 81, 0.15);
+    padding: 0.8rem 0;
 }
 
-/* --- RaceDay Brand Colors --- */
-:root {
-    --raceday-navy: #1D3557;
-    --raceday-red: #E63946;
-    --raceday-blue: #457B9D;
-    --raceday-green: #2A9D8F;
-    --raceday-light: #F1FAEE;
-}
-
-/* --- Hero Section --- */
-.hero-section {
-    background: linear-gradient(rgba(29, 53, 87, 0.8), rgba(29, 53, 87, 0.8)), url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
-    background-size: cover;
-    height: 60vh;
-    margin-top: -16px; /* Pull it up under the navbar */
-}
-
-    .hero-section h1 {
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        font-weight: 800;
+    .navbar-raceday .navbar-brand {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 1.4rem;
+        letter-spacing: -0.5px;
     }
 
-    .hero-section p {
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        font-size: 1.25rem;
+    .navbar-raceday .nav-link {
+        color: rgba(255, 255, 255, 0.75) !important;
+        font-weight: 500;
+        transition: color 0.2s ease;
     }
 
-/* --- Custom Buttons --- */
-.btn-danger {
-    background-color: var(--raceday-red);
-    border-color: var(--raceday-red);
+        .navbar-raceday .nav-link:hover,
+        .navbar-raceday .nav-link.active {
+            color: var(--ct-gold) !important;
+        }
+
+.nav-avatar {
+    width: 38px;
+    height: 38px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--ct-gold);
+    transition: transform 0.2s;
 }
 
-    .btn-danger:hover {
-        background-color: #d62828;
-        border-color: #d62828;
-        transform: translateY(-2px);
-        transition: all 0.2s ease;
+    .nav-avatar:hover {
+        transform: scale(1.05);
     }
 
-.btn-outline-danger {
-    color: var(--raceday-red);
-    border-color: var(--raceday-red);
-}
-
-    .btn-outline-danger:hover {
-        background-color: var(--raceday-red);
-        color: white;
-    }
-
-/* --- Card Hover Effects --- */
+/* --- Cards --- */
 .card {
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    border-radius: 12px;
+    background-color: var(--ct-card-bg);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
 }
 
     .card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+        transform: translateY(-5px);
+        box-shadow: 0 16px 32px rgba(37, 75, 81, 0.1);
     }
 
-/* --- Navbar Overrides --- */
-.navbar-raceday {
-    background-color: var(--raceday-navy) !important;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-    .navbar-raceday .navbar-brand,
-    .navbar-raceday .nav-link {
-        color: var(--raceday-light) !important;
-        font-weight: 500;
-    }
-
-        .navbar-raceday .nav-link:hover {
-            color: var(--raceday-red) !important;
-        }
-
-/* --- Status Badges --- */
-.badge {
+.card-header {
+    border-bottom: none;
+    border-radius: 16px 16px 0 0 !important;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    padding: 0.5em 0.75em;
 }
 
-.badge-confirmed {
-    background-color: var(--raceday-green);
+/* --- Buttons --- */
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    transition: all 0.2s ease;
+    letter-spacing: 0.3px;
+}
+
+/* Primary is now Aquamarine */
+.btn-primary {
+    background-color: var(--ct-aqua);
+    border-color: var(--ct-aqua);
     color: white;
 }
 
-.badge-pending {
-    background-color: #F4A261;
-    color: white;
+    .btn-primary:hover {
+        background-color: var(--ct-aqua-hover);
+        border-color: var(--ct-aqua-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 180, 216, 0.3);
+    }
+
+/* Danger is now Gold */
+.btn-danger {
+    background-color: var(--ct-gold);
+    border-color: var(--ct-gold);
+    color: var(--ct-petrol);
+}
+
+    .btn-danger:hover {
+        background-color: #b8972e;
+        border-color: #b8972e;
+        color: var(--ct-petrol);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    }
+
+.btn-outline-danger {
+    color: var(--ct-petrol);
+    border-color: var(--ct-petrol);
+}
+
+    .btn-outline-danger:hover {
+        background-color: var(--ct-petrol);
+        color: white;
+    }
+
+.btn-outline-primary {
+    color: var(--ct-aqua);
+    border-color: var(--ct-aqua);
+}
+
+    .btn-outline-primary:hover {
+        background-color: var(--ct-aqua);
+        color: white;
+    }
+
+/* --- Forms --- */
+.form-control, .form-select {
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+    .form-control:focus, .form-select:focus {
+        border-color: var(--ct-aqua);
+        box-shadow: 0 0 0 4px rgba(0, 180, 216, 0.15);
+    }
+
+.form-label {
+    font-weight: 500;
+    color: var(--ct-petrol);
+    margin-bottom: 0.4rem;
+}
+
+/* --- Tables --- */
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+    .table thead th {
+        background-color: var(--ct-petrol);
+        color: white;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+        padding: 1rem;
+        border: none;
+    }
+
+    .table tbody td {
+        padding: 1rem;
+        vertical-align: middle;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 180, 216, 0.05);
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    background: linear-gradient(rgba(37, 75, 81, 0.85), rgba(37, 75, 81, 0.95)), url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    height: 65vh;
+    border-radius: 0 0 24px 24px;
+    box-shadow: 0 10px 30px rgba(37, 75, 81, 0.2);
+}
+
+    .hero-section h1 {
+        color: white;
+        text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        font-size: 3.5rem;
+    }
+
+/* --- Footer (Sticky Flexbox) --- */
+.footer {
+    flex-shrink: 0; /* Prevents footer from shrinking */
+    width: 100%;
+    padding: 1.5rem 0;
+    background-color: white;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    color: var(--ct-text-muted);
 }
