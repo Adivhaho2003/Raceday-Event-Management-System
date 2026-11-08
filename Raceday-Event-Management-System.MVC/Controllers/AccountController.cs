@@ -41,6 +41,8 @@ namespace Raceday_Event_Management_System.MVC.Controllers
                     HttpContext.Session.SetString("Role", userResponse.Data.Role);
                     HttpContext.Session.SetString("FirstName", userResponse.Data.FirstName);
                     HttpContext.Session.SetString("LastName", userResponse.Data.LastName);
+                    // Add Profile Picture URL to session
+                    HttpContext.Session.SetString("ProfilePictureUrl", userResponse.Data.ProfilePictureUrl ?? "");
 
                     if (userResponse.Data.Role == "Organiser")
                         return RedirectToAction("Dashboard", "Organiser");
@@ -49,7 +51,6 @@ namespace Raceday_Event_Management_System.MVC.Controllers
                 }
             }
 
-            // Clean error message
             var errorMessage = response?.ErrorMessage ?? "Invalid login attempt";
             if (errorMessage.StartsWith("{"))
                 errorMessage = "Invalid login attempt. Please check your credentials.";
@@ -79,7 +80,6 @@ namespace Raceday_Event_Management_System.MVC.Controllers
                 return RedirectToAction(nameof(Login));
             }
 
-            // Clean error message
             var errorMessage = response?.ErrorMessage ?? "Registration failed";
             if (errorMessage.StartsWith("{"))
                 errorMessage = "Registration failed. Please check your details and try again.";

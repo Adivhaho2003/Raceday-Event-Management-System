@@ -48,11 +48,10 @@ namespace Raceday_Event_Management_System.MVC.Controllers
             if (userId == null || HttpContext.Session.GetString("Role") != "Participant")
                 return RedirectToAction("Login", "Account");
 
-            // Fetch the user's enrolments from the API
-            var response = await _api.GetAsync<List<dynamic>>($"/api/users/{userId}/enrolments");
+            var response = await _api.GetAsync<List<MyEnrolmentViewModel>>($"/api/users/{userId}/enrolments");
+            var viewModels = response?.Data ?? new List<MyEnrolmentViewModel>();
 
-            ViewBag.Enrolments = response?.Data ?? new List<dynamic>();
-            return View();
+            return View(viewModels);
         }
 
         // GET: /Participant/MyResults
@@ -62,10 +61,10 @@ namespace Raceday_Event_Management_System.MVC.Controllers
             if (userId == null || HttpContext.Session.GetString("Role") != "Participant")
                 return RedirectToAction("Login", "Account");
 
-            var response = await _api.GetAsync<List<dynamic>>($"/api/users/{userId}/results");
+            var response = await _api.GetAsync<List<MyResultViewModel>>($"/api/users/{userId}/results");
+            var viewModels = response?.Data ?? new List<MyResultViewModel>();
 
-            ViewBag.Results = response?.Data ?? new List<dynamic>();
-            return View();
+            return View(viewModels);
         }
 
         // GET: /Participant/Profile
