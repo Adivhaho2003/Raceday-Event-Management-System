@@ -1,0 +1,98 @@
+﻿@model Raceday_Event_Management_System.MVC.Models.ViewModels.EventDetailsViewModel
+@{
+    ViewData["Title"] = Model.EventName;
+}
+
+<div class="container mt-4">
+    <!-- Alerts -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Event Header -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-5" style="background: linear-gradient(rgba(29, 53, 87, 0.9), rgba(29, 53, 87, 0.9)); color: white; border-radius: 10px;">
+            <span class="badge bg-danger mb-2">@Model.EventType</span>
+            <h1 class="display-5 fw-bold">@Model.EventName</h1>
+            <p class="lead mb-0"><i class="bi bi-geo-alt-fill"></i> @Model.Location</p>
+            <p class="lead"><i class="bi bi-calendar-event"></i> @Model.EventDate.ToString("dddd, dd MMMM yyyy")</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Left Column: Description -->
+        <div class="col-md-7 mb-4">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h4 class="fw-bold mb-3">About this Event</h4>
+                    <p class="text-muted">
+                        @(string.IsNullOrEmpty(Model.Description) ? "No description provided for this event." : Model.Description)
+                    </p>
+                    <hr />
+                    <p><strong>Distance:</strong> @Model.Distance</p>
+                    <p><strong>Status:</strong> <span class="badge bg-success">@Model.Status</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Enrolment Form -->
+        <div class="col-md-5 mb-4">
+            <div class="card shadow border-0">
+                <div class="card-header bg-danger text-white text-center py-3">
+                    <h4 class="mb-0 fw-bold">Enrol Now</h4>
+                </div>
+                <div class="card-body p-4">
+                    @if (Context.Session.GetString("Role") != "Participant")
+                    {
+                        <div class="alert alert-warning text-center">
+                            You must be logged in as a <strong>Participant</strong> to enter this event.
+                            <br /><br />
+                            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-dark w-100">Log In</a>
+                        </div>
+                    }
+                    else if (Model.IsAlreadyEnrolled)
+                    {
+                        <div class="alert alert-success text-center">
+                            ✅ You are already enrolled in this event!
+                        </div>
+                        <a asp-controller="Participant" asp-action="MyEvents" class="btn btn-outline-success w-100">View My Events</a>
+                    }
+                    else
+                    {
+                        <form asp-controller="Participant" asp-action="Enrol" method="post">
+                            <input type="hidden" name="eventId" value="@Model.EventId" />
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Select Category</label>
+                                <select name="eventCategoryId" class="form-select form-select-lg" required>
+                                    <option value="">-- Choose a category --</option>
+                                    @foreach (var cat in Model.Categories)
+                                    {
+                                        <option value="@cat.EventCategoryId">
+                                            @cat.CategoryName - R @cat.Fee.ToString("F2")
+                                        </option>
+                                    }
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-danger btn-lg w-100 fw-bold">
+                                Confirm Enrolment
+                            </button>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

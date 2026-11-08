@@ -1,0 +1,39 @@
+﻿@model List<Raceday_Event_Management_System.MVC.Models.ViewModels.MyEnrolmentViewModel>
+@{
+    ViewData["Title"] = "My Events";
+}
+
+<div class="container mt-4">
+    <h2 class="fw-bold mb-4">My Enrolments</h2>
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="alert alert-info">You haven't enrolled in any events yet. <a asp-controller="Home" asp-action="Index">Browse events</a>.</div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var en in Model)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <!-- Notice the space before the closing </h5> tag -->
+                                <h5 class="card-title fw-bold mb-0">@en.EventName </h5>
+                                <span class="badge bg-success">@en.Status </span>
+                            </div>
+                            <!-- Notice the space before the closing </p> tag -->
+                            <p class="text-muted small mb-1"><i class="bi bi-tag"></i> Category: @en.CategoryName </p>
+                            <p class="text-muted small mb-1"><i class="bi bi-upc-scan"></i> Reg No: @en.RegistrationNumber </p>
+                            <p class="text-muted small mb-1"><i class="bi bi-credit-card"></i> Payment: <strong>@en.PaymentStatus </strong></p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pt-0">
+                            <a asp-action="EventDetails" asp-route-id="@en.EventId" class="btn btn-sm btn-outline-secondary">View Event</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

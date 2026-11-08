@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0 fw-bold">My Profile</h4>
+                </div>
+                <div class="card-body p-4">
+                    @if (ViewBag.Profile != null)
+                    {
+                        <div class="row mb-3">
+                            <div class="col-md-4 fw-bold">Name:</div>
+                            <div class="col-md-8">@ViewBag.Profile.firstName @ViewBag.Profile.lastName</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4 fw-bold">Email:</div>
+                            <div class="col-md-8">@ViewBag.Profile.email</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4 fw-bold">Phone:</div>
+                            <div class="col-md-8">@(ViewBag.Profile.phone ?? "Not provided")</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4 fw-bold">Date of Birth:</div>
+                            <div class="col-md-8">@(ViewBag.Profile.dateOfBirth != null ? ViewBag.Profile.dateOfBirth.ToString("dd MMM yyyy") : "Not provided")</div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4 fw-bold">Role:</div>
+                            <div class="col-md-8"><span class="badge bg-danger">@ViewBag.Profile.role</span></div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">Could not load profile data.</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
