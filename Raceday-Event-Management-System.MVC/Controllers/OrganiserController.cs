@@ -29,11 +29,13 @@ namespace Raceday_Event_Management_System.MVC.Controllers
             if (userId == null) return RedirectToAction("Login", "Account");
 
             var events = await _eventService.GetOrganiserEventsAsync(userId.Value);
+            // Filter out cancelled events from the dashboard
+            var activeEvents = events.Where(e => e.Status != "Cancelled").ToList();
 
             var model = new OrganiserDashboardViewModel
             {
-                TotalEvents = events.Count,
-                RecentEvents = events.OrderByDescending(e => e.EventDate).Take(5).ToList()
+                TotalEvents = activeEvents.Count,
+                RecentEvents = activeEvents.OrderByDescending(e => e.EventDate).Take(5).ToList()
             };
 
             return View(model);
@@ -49,7 +51,10 @@ namespace Raceday_Event_Management_System.MVC.Controllers
 
             var events = await _eventService.GetOrganiserEventsAsync(userId.Value);
 
-            return View(events);
+            // Filter out cancelled events so they "disappear" from the active list
+            var activeEvents = events.Where(e => e.Status != "Cancelled").ToList();
+
+            return View(activeEvents);
         }
 
         // GET: /Organiser/CreateEvent
@@ -70,7 +75,7 @@ namespace Raceday_Event_Management_System.MVC.Controllers
             string? imageUrl = null;
             if (model.BannerImage != null)
             {
-                imageUrl = await _eventService.SaveImageAsync(model.BannerImage, _webHostEnvironment.WebRootPath);
+                imageUrl = await _eventService.SaveImageAsync(model.BannerImage, _webHostEnvironment.WebRootPath, "events", model.EventName);
             }
 
             var response = await _eventService.CreateEventAsync(model, imageUrl);
@@ -87,6 +92,26 @@ namespace Raceday_Event_Management_System.MVC.Controllers
 
             ModelState.AddModelError(string.Empty, $"Failed to create event: {errorMsg}");
             return View(model);
+        }
+
+        // POST: /Organiser/CancelEvent/5
+        [HttpPost]
+        public async Task<IActionResult> CancelEvent(int id)
+        {
+            if (!IsOrganiser()) return RedirectToAction("Login", "Account");
+
+            var response = await _eventService.CancelEventAsync(id);
+
+            if (response != null && response.IsSuccess)
+            {
+                TempData["SuccessMessage"] = "Event cancelled successfully.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Failed to cancel the event. Please try again.";
+            }
+
+            return RedirectToAction(nameof(ManageEvents));
         }
 
         // GET: /Organiser/ManageCategories/5

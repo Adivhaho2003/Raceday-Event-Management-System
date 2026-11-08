@@ -4,22 +4,22 @@
 }
 
 <!-- Hero Section -->
-<div class="hero-section text-center text-white d-flex align-items-center" style="background: linear-gradient(rgba(29, 53, 87, 0.8), rgba(29, 53, 87, 0.8)), url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=2070&auto=format&fit=crop') no-repeat center center; background-size: cover; height: 60vh; margin-top: -16px;">
+<div class="hero-section text-center text-white d-flex align-items-center mb-5">
     <div class="container">
         <h1 class="display-3 fw-bold mb-3">Find Your Next Race</h1>
-        <p class="lead mb-4">Join the vibrant South African running, walking, and cycling community.</p>
+        <p class="lead mb-5" style="font-size: 1.25rem; opacity: 0.9;">Join the vibrant South African running, walking, and cycling community.</p>
 
         @if (Context.Session.GetInt32("UserId") == null)
         {
-            <a asp-controller="Account" asp-action="Register" class="btn btn-danger btn-lg px-5 py-3 fw-bold shadow">Get Started</a>
+            <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg px-5 py-3 fw-bold shadow-lg">Get Started</a>
         }
         else if (Context.Session.GetString("Role") == "Participant")
         {
-            <a asp-controller="Participant" asp-action="MyEvents" class="btn btn-danger btn-lg px-5 py-3 fw-bold shadow">View My Enrolments</a>
+            <a asp-controller="Participant" asp-action="MyEvents" class="btn btn-primary btn-lg px-5 py-3 fw-bold shadow-lg">View My Enrolments</a>
         }
         else if (Context.Session.GetString("Role") == "Organiser")
         {
-            <a asp-controller="Organiser" asp-action="Dashboard" class="btn btn-danger btn-lg px-5 py-3 fw-bold shadow">Manage My Events</a>
+            <a asp-controller="Organiser" asp-action="Dashboard" class="btn btn-primary btn-lg px-5 py-3 fw-bold shadow-lg">Manage My Events</a>
         }
     </div>
 </div>
@@ -28,22 +28,34 @@
 <div class="container my-5 py-4">
     <div class="row text-center">
         <div class="col-md-4 mb-4">
-            <div class="card h-100 border-0 shadow-sm p-4">
-                <div class="display-4 mb-3">🏃</div>
+            <div class="card h-100 p-4">
+                <div class="mb-3">
+                    <div class="d-inline-flex justify-content-center align-items-center rounded-circle" style="width: 70px; height: 70px; background-color: rgba(0, 180, 216, 0.1); color: var(--ct-aqua);">
+                        <i class="bi bi-person-walking fs-1"></i>
+                    </div>
+                </div>
                 <h4 class="fw-bold">Running & Walking</h4>
                 <p class="text-muted">From 5km fun runs to Comrades qualifiers, find the perfect race for you.</p>
             </div>
         </div>
         <div class="col-md-4 mb-4">
-            <div class="card h-100 border-0 shadow-sm p-4">
-                <div class="display-4 mb-3">🚴</div>
+            <div class="card h-100 p-4">
+                <div class="mb-3">
+                    <div class="d-inline-flex justify-content-center align-items-center rounded-circle" style="width: 70px; height: 70px; background-color: rgba(212, 175, 55, 0.1); color: var(--ct-gold);">
+                        <i class="bi bi-bicycle fs-1"></i>
+                    </div>
+                </div>
                 <h4 class="fw-bold">Cycling Events</h4>
                 <p class="text-muted">Join hundreds of cyclists in races across the country.</p>
             </div>
         </div>
         <div class="col-md-4 mb-4">
-            <div class="card h-100 border-0 shadow-sm p-4">
-                <div class="display-4 mb-3">📊</div>
+            <div class="card h-100 p-4">
+                <div class="mb-3">
+                    <div class="d-inline-flex justify-content-center align-items-center rounded-circle" style="width: 70px; height: 70px; background-color: rgba(37, 75, 81, 0.1); color: var(--ct-petrol);">
+                        <i class="bi bi-bar-chart-line-fill fs-1"></i>
+                    </div>
+                </div>
                 <h4 class="fw-bold">Track Results</h4>
                 <p class="text-muted">Keep a personal record of your times, positions, and personal bests.</p>
             </div>
@@ -52,10 +64,13 @@
 </div>
 
 <!-- Upcoming Events Section -->
-<div class="bg-light py-5">
+<div class="py-5" style="background-color: #ffffff;">
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="fw-bold mb-0">Upcoming Events</h2>
+        <div class="d-flex justify-content-between align-items-end mb-4">
+            <div>
+                <h2 class="fw-bold mb-0">Upcoming Events</h2>
+                <p class="text-muted mb-0 mt-1">Discover races happening near you.</p>
+            </div>
         </div>
 
         @if (Model != null && Model.Any())
@@ -64,25 +79,34 @@
                 @foreach (var ev in Model)
                 {
                     <div class="col-md-4 mb-4">
-                        <div class="card h-100 shadow-sm border-0">
+                        <div class="card h-100">
+                            <div class="overflow-hidden" style="height: 200px;">
+                                <img src="/images/events/@(System.Text.RegularExpressions.Regex.Replace(ev.EventName, @"[^a-zA-Z0-9]", "")).jpg"
+                                     onerror="if (this.src.indexOf('.jpg') > -1) { this.src = this.src.replace('.jpg', '.png'); } else if (this.src.indexOf('.png') > -1) { this.src = this.src.replace('.png', '.jpeg'); } else { this.src='https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=600&auto=format&fit=crop'; }"
+                                     class="w-100 h-100"
+                                     alt="@ev.EventName"
+                                     style="object-fit: cover; transition: transform 0.4s ease;"
+                                     onmouseover="this.style.transform='scale(1.05)'"
+                                     onmouseout="this.style.transform='scale(1)'">
+                            </div>
                             <div class="card-body">
                                 <div class="d-flex justify-content-between mb-2">
-                                    <span class="badge bg-danger">@ev.EventType</span>
-                                    <small class="text-muted">@ev.EventDate.ToString("dd MMM yyyy")</small>
+                                    <!-- Gold Badge for Premium Look -->
+                                    <span class="badge px-3 py-2 rounded-pill" style="background-color: var(--ct-gold); color: var(--ct-petrol); font-weight: 600;">@ev.EventType</span>
+                                    <small class="text-muted fw-bold"><i class="bi bi-calendar-event me-1"></i>@ev.EventDate.ToString("dd MMM yyyy")</small>
                                 </div>
-                                <h5 class="card-title fw-bold">@ev.EventName</h5>
+                                <h5 class="card-title fw-bold text-truncate">@ev.EventName</h5>
                                 <p class="card-text text-muted small mb-3">
-                                    <i class="bi bi-geo-alt-fill"></i> @ev.Location <br />
+                                    <i class="bi bi-geo-alt-fill me-1" style="color: var(--ct-aqua);"></i> @ev.Location <br />
                                     @if (!string.IsNullOrEmpty(ev.Distance))
                                     {
-                                        <i class="bi bi-rulers"></i> 
+                                        <i class="bi bi-rulers me-1" style="color: var(--ct-aqua);"></i> 
                                         @ev.Distance
                                     }
                                 </p>
                             </div>
-                            <div class="card-footer bg-white border-0 pt-0">
-                                <!-- Updated to link to Event Details -->
-                                <a asp-controller="Participant" asp-action="EventDetails" asp-route-id="@ev.EventId" class="btn btn-outline-danger w-100">View Details</a>
+                            <div class="card-footer bg-white border-0 pt-0 pb-4 px-4">
+                                <a asp-controller="Participant" asp-action="EventDetails" asp-route-id="@ev.EventId" class="btn btn-primary w-100 fw-bold">View Details</a>
                             </div>
                         </div>
                     </div>
@@ -91,7 +115,7 @@
         }
         else
         {
-            <div class="alert alert-info">No upcoming events found. Check back later!</div>
+            <div class="alert alert-info border-0 shadow-sm">No upcoming events found. Check back later!</div>
         }
     </div>
 </div>

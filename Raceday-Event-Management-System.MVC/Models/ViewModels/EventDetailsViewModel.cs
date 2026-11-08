@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Raceday_Event_Management_System.MVC.Models.ViewModels
+﻿namespace Raceday_Event_Management_System.MVC.Models.ViewModels
 {
     public class EventDetailsViewModel
     {
@@ -13,18 +11,22 @@ namespace Raceday_Event_Management_System.MVC.Models.ViewModels
         public string? Distance { get; set; }
         public string Status { get; set; } = string.Empty;
 
-        // List of categories available for this event
+        // Add this property
+        public string? BannerImageUrl { get; set; }
+
         public List<EventCategoryItem> Categories { get; set; } = new();
 
-        // Flag to check if the logged-in participant is already enrolled
         public bool IsAlreadyEnrolled { get; set; }
     }
 
     public class EventCategoryItem
     {
         public int EventCategoryId { get; set; }
-        public string CategoryName { get; set; } = string.Empty;
         public decimal Fee { get; set; }
         public int? Capacity { get; set; }
+
+        public CategoryViewModel? Category { get; set; }
+
+        public string CategoryName => Category?.CategoryName ?? "Unknown Category";
     }
 }

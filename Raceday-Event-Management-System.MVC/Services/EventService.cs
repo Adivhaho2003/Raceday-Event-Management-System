@@ -37,7 +37,8 @@ namespace Raceday_Event_Management_System.MVC.Services
                 EventDate = eventResponse.Data.EventDate,
                 EventType = eventResponse.Data.EventType,
                 Distance = eventResponse.Data.Distance,
-                Status = eventResponse.Data.Status
+                Status = eventResponse.Data.Status,
+                BannerImageUrl = eventResponse.Data.BannerImageUrl
             };
 
             var categoriesResponse = await _api.GetAsync<List<EventCategoryItem>>($"/api/events/{eventId}/categories");
@@ -65,8 +66,7 @@ namespace Raceday_Event_Management_System.MVC.Services
             return response?.IsSuccess == true && response.Data != null ? response.Data : new List<EventViewModel>();
         }
 
-        // Save Image to wwwroot
-        public async Task<string?> SaveImageAsync(IFormFile file, string webRootPath)
+        public async Task<string?> SaveImageAsync(IFormFile file, string webRootPath, string folderName = "events", string? customName = null)
         {
             if (file == null || file.Length == 0) return null;
 
@@ -74,22 +74,33 @@ namespace Raceday_Event_Management_System.MVC.Services
             var extension = Path.GetExtension(file.FileName).ToLower();
             if (!allowedExtensions.Contains(extension)) return null;
 
-            var fileName = $"{Guid.NewGuid()}{extension}";
-            var uploadsFolder = Path.Combine(webRootPath, "images", "events");
+            string fileName;
+            if (!string.IsNullOrEmpty(customName))
+            {
+                var safeName = string.Join("", customName.Split(Path.GetInvalidFileNameChars()));
+                safeName = safeName.Replace(" ", "");
+                fileName = $"{safeName}{extension}";
+            }
+            else
+            {
+                fileName = $"{Guid.NewGuid()}{extension}";
+            }
+
+            var uploadsFolder = Path.Combine(webRootPath, "images", folderName);
 
             if (!Directory.Exists(uploadsFolder))
                 Directory.CreateDirectory(uploadsFolder);
 
             var filePath = Path.Combine(uploadsFolder, fileName);
+
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
             }
 
-            return $"/images/events/{fileName}";
+            return $"/images/{folderName}/{fileName}";
         }
 
-        // Create Event (Includes Image URL)
         public async Task<ApiResponse<object>?> CreateEventAsync(CreateEventViewModel model, string? imageUrl)
         {
             var formattedEventDate = model.EventDate.ToString("s");
@@ -113,6 +124,13 @@ namespace Raceday_Event_Management_System.MVC.Services
             }
 
             return await _api.PostAsync<object>(endpoint);
+        }
+
+        // Renamed to CancelEventAsync to reflect the soft-delete approach
+        public async Task<ApiResponse<object>?> CancelEventAsync(int eventId)
+        {
+            var endpoint = $"/api/events/{eventId}/status?status=Cancelled";
+            return await _api.PatchAsync<object>(endpoint);
         }
 
         // --- CATEGORY METHODS ---
