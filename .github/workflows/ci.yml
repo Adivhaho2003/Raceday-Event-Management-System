@@ -21,16 +21,10 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore RaceDay_Management_System.sln
 
-      - name: Build API
-        run: dotnet build RaceDay_Management_System/RaceDay_Management_System.csproj --no-restore --configuration Release
-
-      - name: Build MVC Application
-        run: dotnet build Raceday-Event-Management-System.MVC/Raceday-Event-Management-System.MVC.csproj --no-restore --configuration Release
-
-      - name: Build Test Project
-        run: dotnet build RaceDay_Management_System.Tests/RaceDay_Management_System.Tests.csproj --no-restore --configuration Release
+      - name: Build Solution
+        run: dotnet build RaceDay_Management_System.sln --no-restore --configuration Release
         
       # Note: The dotnet test step is excluded here because the integration tests 
       # require a live SQL Server instance, which is not available on the default 
