@@ -3,84 +3,103 @@
     ViewData["Title"] = "Register";
 }
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-body p-4">
-                    <h2 class="text-center mb-4">🏃 Create an Account</h2>
-
-                    <form asp-action="Register" method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="FirstName" class="form-label"></label>
-                                <input asp-for="FirstName" class="form-control" />
-                                <span asp-validation-for="FirstName" class="text-danger"></span>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="LastName" class="form-label"></label>
-                                <input asp-for="LastName" class="form-control" />
-                                <span asp-validation-for="LastName" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="Email" class="form-label"></label>
-                            <input asp-for="Email" class="form-control" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="Phone" class="form-label"></label>
-                            <input asp-for="Phone" class="form-control" />
-                            <span asp-validation-for="Phone" class="text-danger"></span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="DateOfBirth" class="form-label">Date of Birth (Optional)</label>
-                            <input asp-for="DateOfBirth" type="date" class="form-control" />
-                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="Password" class="form-label"></label>
-                                <input asp-for="Password" class="form-control" />
-                                <span asp-validation-for="Password" class="text-danger"></span>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="ConfirmPassword" class="form-label"></label>
-                                <input asp-for="ConfirmPassword" class="form-control" />
-                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">I am joining as a:</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" asp-for="Role" value="Participant" id="roleParticipant" />
-                                <label class="form-check-label" for="roleParticipant">
-                                    🏃 Participant (Browse events, enter races)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" asp-for="Role" value="Organiser" id="roleOrganiser" />
-                                <label class="form-check-label" for="roleOrganiser">
-                                    🎽 Organiser (Create and manage events)
-                                </label>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-danger w-100 mb-3">Create Account</button>
-
-                        <p class="text-center mb-0">
-                            Already have an account? <a asp-action="Login">Log in here</a>
-                        </p>
-                    </form>
+<div class="container d-flex align-items-center justify-content-center py-5" style="min-height: 90vh; background: radial-gradient(circle at center, #f4f7f6 0%, #e2e8e6 100%);">
+    <div class="card shadow-lg border-0" style="max-width: 700px; width: 100%; border-radius: 20px;">
+        <div class="card-body p-5">
+            <div class="text-center mb-4">
+                <div class="d-inline-flex justify-content-center align-items-center rounded-circle mb-3"
+                     style="width: 65px; height: 65px; background-color: rgba(212, 175, 55, 0.15); color: #b8972e;">
+                    <i class="bi bi-person-plus-fill fs-2"></i>
                 </div>
+                <h2 class="fw-bold" style="font-family: 'Poppins', sans-serif; color: var(--ct-petrol);">Create an Account</h2>
+                <p class="text-muted">Join the RaceDay community today.</p>
             </div>
+
+            <form asp-action="Register" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3 small"></div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="FirstName" class="form-label">First Name</label>
+                        <input asp-for="FirstName" class="form-control bg-light" />
+                        <span asp-validation-for="FirstName" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="LastName" class="form-label">Last Name</label>
+                        <input asp-for="LastName" class="form-control bg-light" />
+                        <span asp-validation-for="LastName" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email Address</label>
+                    <input asp-for="Email" class="form-control bg-light" />
+                    <span asp-validation-for="Email" class="text-danger small"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Phone" class="form-label">Phone Number</label>
+                        <input asp-for="Phone" class="form-control bg-light" />
+                        <span asp-validation-for="Phone" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="DateOfBirth" class="form-label">Date of Birth</label>
+                        <input asp-for="DateOfBirth" type="date" class="form-control bg-light" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Password" class="form-label">Password</label>
+                        <input asp-for="Password" class="form-control bg-light" />
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" class="form-control bg-light" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="mb-4 mt-3">
+                    <label class="form-label mb-3 fw-bold">I am joining as a:</label>
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <div class="form-check p-3 border rounded" style="cursor: pointer; background-color: #f8f9fa; transition: all 0.2s;">
+                                <input class="form-check-input" type="radio" asp-for="Role" value="Participant" id="roleParticipant" checked>
+                                <label class="form-check-label ms-2" for="roleParticipant" style="cursor: pointer;">
+                                    <span class="fw-bold" style="color: var(--ct-petrol);"><i class="bi bi-person-running me-1" style="color: var(--ct-aqua);"></i> Participant</span>
+                                    <br><small class="text-muted">Browse & enter events</small>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="form-check p-3 border rounded" style="cursor: pointer; background-color: #f8f9fa; transition: all 0.2s;">
+                                <input class="form-check-input" type="radio" asp-for="Role" value="Organiser" id="roleOrganiser">
+                                <label class="form-check-label ms-2" for="roleOrganiser" style="cursor: pointer;">
+                                    <span class="fw-bold" style="color: var(--ct-petrol);"><i class="bi bi-megaphone me-1" style="color: var(--ct-gold);"></i> Organiser</span>
+                                    <br><small class="text-muted">Create & manage events</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Changed to btn-primary (Aquamarine) for primary action -->
+                <button type="submit" class="btn btn-primary w-100 py-3 mb-3 fw-bold" style="border-radius: 10px;">Create Account</button>
+
+                <p class="text-center mb-0 text-muted">
+                    Already have an account? <a asp-action="Login" class="fw-bold text-decoration-none" style="color: var(--ct-aqua);">Log in here</a>
+                </p>
+            </form>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

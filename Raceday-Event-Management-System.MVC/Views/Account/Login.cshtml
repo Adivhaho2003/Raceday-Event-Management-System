@@ -3,41 +3,59 @@
     ViewData["Title"] = "Log In";
 }
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-5">
-            <div class="card shadow">
-                <div class="card-body p-4">
-                    <h2 class="text-center mb-4">🏃 Log In</h2>
-
-                    @if (TempData["SuccessMessage"] != null)
-                    {
-                        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
-                    }
-
-                    <form asp-action="Login" method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
-                        <div class="mb-3">
-                            <label asp-for="Email" class="form-label"></label>
-                            <input asp-for="Email" class="form-control" placeholder="you@example.com" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="Password" class="form-label"></label>
-                            <input asp-for="Password" class="form-control" placeholder="••••••••" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-
-                        <button type="submit" class="btn btn-danger w-100 mb-3">Log In</button>
-
-                        <p class="text-center mb-0">
-                            Don't have an account? <a asp-action="Register">Register here</a>
-                        </p>
-                    </form>
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 85vh; background: radial-gradient(circle at center, #f4f7f6 0%, #e2e8e6 100%);">
+    <div class="card shadow-lg border-0" style="max-width: 450px; width: 100%; border-radius: 20px;">
+        <div class="card-body p-5">
+            <div class="text-center mb-4">
+                <div class="d-inline-flex justify-content-center align-items-center rounded-circle mb-3"
+                     style="width: 65px; height: 65px; background-color: rgba(0, 180, 216, 0.1); color: var(--ct-aqua);">
+                    <i class="bi bi-box-arrow-in-right fs-2"></i>
                 </div>
+                <h2 class="fw-bold" style="font-family: 'Poppins', sans-serif; color: var(--ct-petrol);">Welcome Back</h2>
+                <p class="text-muted">Log in to manage your events and results.</p>
             </div>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success border-0 shadow-sm mb-4" style="border-radius: 10px;">
+                    <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+                </div>
+            }
+
+            <form asp-action="Login" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3 small"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-envelope"></i></span>
+                        <input asp-for="Email" class="form-control border-start-0 bg-light" placeholder="you@example.com" />
+                    </div>
+                    <span asp-validation-for="Email" class="text-danger small"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0 text-muted"><i class="bi bi-lock"></i></span>
+                        <input asp-for="Password" class="form-control border-start-0 bg-light" placeholder="••••••••" />
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger small"></span>
+                </div>
+
+                <!-- Changed to btn-primary (Aquamarine) for primary action -->
+                <button type="submit" class="btn btn-primary w-100 py-3 mb-3 fw-bold" style="border-radius: 10px;">Log In</button>
+
+                <p class="text-center mb-0 text-muted">
+                    Don't have an account? <a asp-action="Register" class="fw-bold text-decoration-none" style="color: var(--ct-aqua);">Register here</a>
+                </p>
+            </form>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
