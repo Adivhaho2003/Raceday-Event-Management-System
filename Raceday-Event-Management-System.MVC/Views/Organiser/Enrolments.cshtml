@@ -1,0 +1,122 @@
+﻿@model List<Raceday_Event_Management_System.MVC.Models.ViewModels.EventEnrolmentViewModel>
+@{
+    ViewData["Title"] = "Enrolments";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold mb-0">Enrolments for: @ViewBag.EventName</h2>
+        <a asp-action="ManageEvents" class="btn btn-outline-secondary">Back to Events</a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (Model == null || Model.Count == 0)
+    {
+        <div class="alert alert-info">No one has enrolled in this event yet.</div>
+    }
+    else
+    {
+        <div class="table-responsive shadow-sm rounded">
+            <table class="table table-hover bg-white mb-0 align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Participant</th>
+                        <th>Reg Number</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Payment</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var en in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@en.ParticipantName </strong><br />
+                                <small class="text-muted">@en.ParticipantEmail </small>
+                            </td>
+                            <td>@en.RegistrationNumber </td>
+                            <td>@en.CategoryName </td>
+                            <td><span class="badge bg-success">@en.Status </span></td>
+                            <td>@en.PaymentStatus </td>
+                            <td class="text-end">
+                                <!-- Trigger the modal for results -->
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#resultModal-@en.EnrolmentId">
+                                    Capture Result
+                                </button>
+
+                                <!-- Result Entry Modal -->
+                                <div class="modal fade" id="resultModal-@en.EnrolmentId" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content text-start">
+                                            <form asp-action="CaptureResult" method="post">
+                                                <div class="modal-header bg-danger text-white">
+                                                    <h5 class="modal-title">Capture Result: @en.ParticipantName</h5>
+                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="EnrolmentId" value="@en.EnrolmentId" />
+                                                    <input type="hidden" name="eventId" value="@ViewBag.EventId" />
+
+                                                    <div class="mb-2">
+                                                        <label class="form-label fw-bold">Gun Time (HH:mm:ss)</label>
+                                                        <input name="GunTime" class="form-control" placeholder="03:45:00" required />
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label class="form-label fw-bold">Chip Time (HH:mm:ss)</label>
+                                                        <input name="ChipTime" class="form-control" placeholder="03:42:00" required />
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        <div class="col">
+                                                            <label class="form-label fw-bold">Overall Pos</label>
+                                                            <input name="OverallPosition" type="number" class="form-control" placeholder="45" />
+                                                        </div>
+                                                        <div class="col">
+                                                            <label class="form-label fw-bold">Cat Pos</label>
+                                                            <input name="CategoryPosition" type="number" class="form-control" placeholder="12" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label class="form-label fw-bold">Pace (min/km)</label>
+                                                        <input name="Pace" type="number" step="0.01" class="form-control" placeholder="5.5" />
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label class="form-label fw-bold">Status</label>
+                                                        <select name="Status" class="form-select">
+                                                            <option value="Completed">Completed</option>
+                                                            <option value="DNS">DNS (Did Not Start)</option>
+                                                            <option value="DNF">DNF (Did Not Finish)</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-danger">Save Result</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
