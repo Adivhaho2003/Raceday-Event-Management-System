@@ -1,0 +1,127 @@
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    margin-bottom: 60px; /* Space for the fixed footer */
+    background-color: #f8f9fa; /* Light grey background for the whole app */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Accessibility Focus Ring --- */
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #E63946; /* Changed from blue to Race Red */
+}
+
+/* --- Fixed Footer --- */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    background-color: #ffffff;
+    border-top: 1px solid #dee2e6;
+}
+
+/* --- RaceDay Brand Colors --- */
+:root {
+    --raceday-navy: #1D3557;
+    --raceday-red: #E63946;
+    --raceday-blue: #457B9D;
+    --raceday-green: #2A9D8F;
+    --raceday-light: #F1FAEE;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    background: linear-gradient(rgba(29, 53, 87, 0.8), rgba(29, 53, 87, 0.8)), url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    height: 60vh;
+    margin-top: -16px; /* Pull it up under the navbar */
+}
+
+    .hero-section h1 {
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        font-weight: 800;
+    }
+
+    .hero-section p {
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        font-size: 1.25rem;
+    }
+
+/* --- Custom Buttons --- */
+.btn-danger {
+    background-color: var(--raceday-red);
+    border-color: var(--raceday-red);
+}
+
+    .btn-danger:hover {
+        background-color: #d62828;
+        border-color: #d62828;
+        transform: translateY(-2px);
+        transition: all 0.2s ease;
+    }
+
+.btn-outline-danger {
+    color: var(--raceday-red);
+    border-color: var(--raceday-red);
+}
+
+    .btn-outline-danger:hover {
+        background-color: var(--raceday-red);
+        color: white;
+    }
+
+/* --- Card Hover Effects --- */
+.card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+    }
+
+/* --- Navbar Overrides --- */
+.navbar-raceday {
+    background-color: var(--raceday-navy) !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+    .navbar-raceday .navbar-brand,
+    .navbar-raceday .nav-link {
+        color: var(--raceday-light) !important;
+        font-weight: 500;
+    }
+
+        .navbar-raceday .nav-link:hover {
+            color: var(--raceday-red) !important;
+        }
+
+/* --- Status Badges --- */
+.badge {
+    font-weight: 600;
+    padding: 0.5em 0.75em;
+}
+
+.badge-confirmed {
+    background-color: var(--raceday-green);
+    color: white;
+}
+
+.badge-pending {
+    background-color: #F4A261;
+    color: white;
+}
