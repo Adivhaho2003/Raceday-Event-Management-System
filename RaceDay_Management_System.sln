@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceDay_Management_System",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaceDay_Management_System.Tests", "RaceDay_Management_System.Tests\RaceDay_Management_System.Tests.csproj", "{4F073EA3-0471-5D95-2156-EC4959A20331}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raceday-Event-Management-System.MVC", "Raceday-Event-Management-System.MVC\Raceday-Event-Management-System.MVC.csproj", "{DCC055E4-49E6-4EE4-AF0B-4F7ED252A715}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4F073EA3-0471-5D95-2156-EC4959A20331}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F073EA3-0471-5D95-2156-EC4959A20331}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F073EA3-0471-5D95-2156-EC4959A20331}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC055E4-49E6-4EE4-AF0B-4F7ED252A715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC055E4-49E6-4EE4-AF0B-4F7ED252A715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC055E4-49E6-4EE4-AF0B-4F7ED252A715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC055E4-49E6-4EE4-AF0B-4F7ED252A715}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

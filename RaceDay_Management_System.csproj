@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<NoWarn>$(NoWarn);1591;CS8981</NoWarn>
+		<NoWarn>$(NoWarn);1591;CS8981;CS0618;CS8600;CS8601;CS8603;CS0168</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -14,12 +14,17 @@
 		<PackageReference Include="System.Data.SqlClient" Version="4.9.1" />
 	</ItemGroup>
 
-	<!-- Exclude the test project folder from this project's compilation -->
+	<!-- Exclude other projects from this project's compilation -->
 	<ItemGroup>
 		<Compile Remove="RaceDay_Management_System.Tests\**" />
 		<Content Remove="RaceDay_Management_System.Tests\**" />
 		<None Remove="RaceDay_Management_System.Tests\**" />
 		<EmbeddedResource Remove="RaceDay_Management_System.Tests\**" />
+
+		<Compile Remove="Raceday-Event-Management-System.MVC\**" />
+		<Content Remove="Raceday-Event-Management-System.MVC\**" />
+		<None Remove="Raceday-Event-Management-System.MVC\**" />
+		<EmbeddedResource Remove="Raceday-Event-Management-System.MVC\**" />
 	</ItemGroup>
 
 </Project>
