@@ -1,32 +1,29 @@
-using Microsoft.AspNetCore.Mvc;
-using Raceday_Event_Management_System.MVC.Models;
-using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Mvc;
+using Raceday_Event_Management_System.MVC.Services;
 
 namespace Raceday_Event_Management_System.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly EventService _eventService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(EventService eventService)
         {
-            _logger = logger;
+            _eventService = eventService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
+            var events = await _eventService.GetAllEventsAsync();
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+            // Show the 3 most recent upcoming events on the home page
+            var upcomingEvents = events
+                .Where(e => e.EventDate >= DateTime.Now)
+                .OrderBy(e => e.EventDate)
+                .Take(3)
+                .ToList();
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(upcomingEvents);
         }
     }
 }

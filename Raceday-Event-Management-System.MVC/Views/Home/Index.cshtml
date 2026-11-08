@@ -1,8 +1,97 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<Raceday_Event_Management_System.MVC.Models.EventViewModel>
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Hero Section -->
+<div class="hero-section text-center text-white d-flex align-items-center" style="background: linear-gradient(rgba(29, 53, 87, 0.8), rgba(29, 53, 87, 0.8)), url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=2070&auto=format&fit=crop') no-repeat center center; background-size: cover; height: 60vh; margin-top: -16px;">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-3">Find Your Next Race</h1>
+        <p class="lead mb-4">Join the vibrant South African running, walking, and cycling community.</p>
+
+        @if (Context.Session.GetInt32("UserId") == null)
+        {
+            <a asp-controller="Account" asp-action="Register" class="btn btn-danger btn-lg px-5 py-3 fw-bold shadow">Get Started</a>
+        }
+        else if (Context.Session.GetString("Role") == "Participant")
+        {
+            <a asp-controller="Participant" asp-action="MyEvents" class="btn btn-danger btn-lg px-5 py-3 fw-bold shadow">View My Enrolments</a>
+        }
+        else if (Context.Session.GetString("Role") == "Organiser")
+        {
+            <a asp-controller="Organiser" asp-action="Dashboard" class="btn btn-danger btn-lg px-5 py-3 fw-bold shadow">Manage My Events</a>
+        }
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container my-5 py-4">
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm p-4">
+                <div class="display-4 mb-3">🏃</div>
+                <h4 class="fw-bold">Running & Walking</h4>
+                <p class="text-muted">From 5km fun runs to Comrades qualifiers, find the perfect race for you.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm p-4">
+                <div class="display-4 mb-3">🚴</div>
+                <h4 class="fw-bold">Cycling Events</h4>
+                <p class="text-muted">Join hundreds of cyclists in races across the country.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm p-4">
+                <div class="display-4 mb-3">📊</div>
+                <h4 class="fw-bold">Track Results</h4>
+                <p class="text-muted">Keep a personal record of your times, positions, and personal bests.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Upcoming Events Section -->
+<div class="bg-light py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold mb-0">Upcoming Events</h2>
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="row">
+                @foreach (var ev in Model)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="badge bg-danger">@ev.EventType</span>
+                                    <small class="text-muted">@ev.EventDate.ToString("dd MMM yyyy")</small>
+                                </div>
+                                <h5 class="card-title fw-bold">@ev.EventName</h5>
+                                <p class="card-text text-muted small mb-3">
+                                    <i class="bi bi-geo-alt-fill"></i> @ev.Location <br />
+                                    @if (!string.IsNullOrEmpty(ev.Distance))
+                                    {
+                                        <i class="bi bi-rulers"></i> 
+                                        @ev.Distance
+                                    }
+                                </p>
+                            </div>
+                            <div class="card-footer bg-white border-0 pt-0">
+                                <!-- Updated to link to Event Details -->
+                                <a asp-controller="Participant" asp-action="EventDetails" asp-route-id="@ev.EventId" class="btn btn-outline-danger w-100">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">No upcoming events found. Check back later!</div>
+        }
+    </div>
 </div>
