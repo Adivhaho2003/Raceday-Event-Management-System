@@ -1,0 +1,83 @@
+﻿@model Raceday_Event_Management_System.MVC.Models.ViewModels.ProfileViewModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Profile Picture Column -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0 text-center p-4">
+                <div class="position-relative d-inline-block mx-auto mb-3">
+                    <img src="@(string.IsNullOrEmpty(Model.ProfilePictureUrl) ? "/images/default-avatar.png" : Model.ProfilePictureUrl)"
+                         class="rounded-circle shadow" style="width: 150px; height: 150px; object-fit: cover;" />
+                </div>
+                <h4 class="fw-bold">@Model.FirstName @Model.LastName </h4>
+                <p class="text-muted"><span class="badge bg-danger">@Model.Role</span></p>
+
+                <!-- Only show upload for Participants -->
+                @if (Context.Session.GetString("Role") == "Participant")
+                {
+                    <form asp-action="UploadPicture" method="post" enctype="multipart/form-data">
+                        <div class="input-group input-group-sm mt-3">
+                            <input type="file" name="profilePicture" class="form-control" accept="image/*" required />
+                            <button class="btn btn-outline-danger" type="submit"><i class="bi bi-upload"></i></button>
+                        </div>
+                        <small class="text-muted d-block mt-2">Upload a new profile picture</small>
+                    </form>
+                }
+            </div>
+        </div>
+
+        <!-- Edit Details Column -->
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0"><i class="bi bi-pencil-square"></i> Edit Personal Details</h5>
+                </div>
+                <div class="card-body">
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                    }
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+                    }
+
+                    <form asp-action="Update" method="post">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">First Name</label>
+                                <input asp-for="FirstName" class="form-control" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Last Name</label>
+                                <input asp-for="LastName" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Email</label>
+                            <input asp-for="Email" class="form-control" readonly disabled />
+                            <small class="text-muted">Email cannot be changed.</small>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Phone</label>
+                                <input asp-for="Phone" class="form-control" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Date of Birth</label>
+                                <input asp-for="DateOfBirth" type="date" class="form-control" />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-danger w-100 fw-bold"><i class="bi bi-save"></i> Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
