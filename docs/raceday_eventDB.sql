@@ -489,3 +489,5 @@ SELECT
     'Partly cloudy with pleasant temperatures.',
     'WeatherSA'
 FROM Events WHERE EventName = 'Two Oceans Marathon 2026';
+
+ALTER TABLE Events ADD BannerImageUrl NVARCHAR(500) NULL;
