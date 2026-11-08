@@ -1,0 +1,93 @@
+﻿@model Raceday_Event_Management_System.MVC.Models.ViewModels.CreateEventViewModel
+@{
+    ViewData["Title"] = "Create Event";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-0">
+                <div class="card-header bg-danger text-white py-3">
+                    <h4 class="mb-0 fw-bold">Create New Event</h4>
+                </div>
+                <div class="card-body p-4">
+                    <!-- MUST ADD enctype="multipart/form-data" -->
+                    <form asp-action="CreateEvent" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="EventName" class="form-label fw-bold">Event Name</label>
+                            <input asp-for="EventName" class="form-control" placeholder="e.g., Soweto Marathon 2026" />
+                            <span asp-validation-for="EventName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label fw-bold">Description</label>
+                            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <!-- NEW: Banner Image Upload -->
+                        <div class="mb-3">
+                            <label asp-for="BannerImage" class="form-label fw-bold">Event Banner Image</label>
+                            <input asp-for="BannerImage" class="form-control" accept="image/*" />
+                            <small class="text-muted">Upload a JPG or PNG for the event card.</small>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Location" class="form-label fw-bold">City / Region</label>
+                                <input asp-for="Location" class="form-control" />
+                                <span asp-validation-for="Location" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Venue" class="form-label fw-bold">Venue (Optional)</label>
+                                <input asp-for="Venue" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="EventDate" class="form-label fw-bold">Event Date & Time</label>
+                                <input asp-for="EventDate" type="datetime-local" class="form-control" />
+                                <span asp-validation-for="EventDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="RegistrationDeadline" class="form-label fw-bold">Registration Deadline</label>
+                                <input asp-for="RegistrationDeadline" type="datetime-local" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="EventType" class="form-label fw-bold">Event Type</label>
+                                <select asp-for="EventType" class="form-select">
+                                    <option value="Running">Running</option>
+                                    <option value="Walking">Walking</option>
+                                    <option value="Cycling">Cycling</option>
+                                </select>
+                                <span asp-validation-for="EventType" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="Distance" class="form-label fw-bold">Distance</label>
+                                <input asp-for="Distance" class="form-control" placeholder="e.g. 21.1 km" />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="EntryFee" class="form-label fw-bold">Entry Fee (ZAR)</label>
+                                <input asp-for="EntryFee" class="form-control" type="number" step="0.01" />
+                                <span asp-validation-for="EntryFee" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="MaxParticipants" class="form-label fw-bold">Max Participants</label>
+                            <input asp-for="MaxParticipants" class="form-control" type="number" />
+                            <span asp-validation-for="MaxParticipants" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-danger btn-lg w-100 fw-bold">Create Event</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

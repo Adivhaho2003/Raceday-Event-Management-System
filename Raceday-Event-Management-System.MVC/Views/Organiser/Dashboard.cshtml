@@ -1,0 +1,47 @@
+﻿@model Raceday_Event_Management_System.MVC.Models.ViewModels.OrganiserDashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold mb-0">Organiser Dashboard</h2>
+        <a asp-action="CreateEvent" class="btn btn-danger fw-bold">+ Create New Event</a>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 bg-primary text-white text-center p-4">
+                <h1 class="display-4 fw-bold">@Model.TotalEvents</h1>
+                <h5>Events Created</h5>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 bg-success text-white text-center p-4">
+                <h1 class="display-4 fw-bold">@Model.TotalEnrolments</h1>
+                <h5>Total Enrolments</h5>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="fw-bold mb-3">Your Recent Events</h4>
+    @if (Model.RecentEvents.Any())
+    {
+        <div class="list-group shadow-sm">
+            @foreach (var ev in Model.RecentEvents)
+            {
+                <div class="list-group-item d-flex justify-content-between align-items-center p-3">
+                    <div>
+                        <h5 class="mb-1 fw-bold">@ev.EventName</h5>
+                        <p class="mb-1 text-muted small"><i class="bi bi-calendar-event"></i> @ev.EventDate.ToString("dd MMM yyyy") - @ev.Location</p>
+                    </div>
+                    <a asp-action="ManageEvents" class="btn btn-sm btn-outline-dark">Manage</a>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">You haven't created any events yet. Click "Create New Event" to get started.</div>
+    }
+</div>
