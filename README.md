@@ -159,7 +159,7 @@ The API exposes **42 endpoints** across 7 resource areas:
 
 ## 🎥 Video Presentation
 
-[**Watch the full project walkthrough here**](https://youtu.be/lYpDC1AGnEI)
+[**Watch the full project walkthrough here**](https://youtu.be/d0XZZgJzfco)
 
 **The video covers:**
 - ⏱️ **0:00** — Introduction and project overview
